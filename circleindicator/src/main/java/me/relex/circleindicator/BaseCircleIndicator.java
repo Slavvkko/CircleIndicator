@@ -244,6 +244,30 @@ class BaseCircleIndicator extends LinearLayout {
         mLastPosition = position;
     }
 
+    public int getIndicatorMargin() {
+        return mIndicatorMargin;
+    }
+
+    public int getIndicatorWidth() {
+        return mIndicatorWidth;
+    }
+
+    public int getIndicatorHeight() {
+        return mIndicatorHeight;
+    }
+
+    public void setIndicatorDimensions(int margin, int width, int height) {
+        if (margin != mIndicatorMargin || width != mIndicatorWidth || width != mIndicatorHeight) {
+            mIndicatorMargin = margin;
+            mIndicatorWidth = width;
+            mIndicatorHeight = height;
+
+            int count = getChildCount();
+            createIndicators(0, mLastPosition);
+            createIndicators(count, mLastPosition);
+        }
+    }
+
     protected class ReverseInterpolator implements Interpolator {
         @Override public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
